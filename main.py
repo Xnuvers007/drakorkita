@@ -162,9 +162,16 @@ try:
 
         print(f"\n{episode_number} - Links:")
         
-        # Membuka file untuk menulis link dengan kualitas tertentu
-        high_quality_file = open(f"{inputan.replace(' ', '_')}_480p_up.txt", 'a', encoding='utf-8')
-        low_quality_file = open(f"{inputan.replace(' ', '_')}_below_480p.txt", 'a', encoding='utf-8')
+        # Membuat direktori untuk menyimpan file jika belum ada
+        directory_name = "drakorkita_downloads"
+        if not os.path.exists(directory_name):
+            os.mkdir(directory_name)
+
+        high_quality_file_path = os.path.join(directory_name, f"{inputan.replace(' ', '_')}_480p_up.txt")
+        low_quality_file_path = os.path.join(directory_name, f"{inputan.replace(' ', '_')}_below_480p.txt")
+
+        high_quality_file = open(high_quality_file_path, 'a', encoding='utf-8')
+        low_quality_file = open(low_quality_file_path, 'a', encoding='utf-8')
         
         # Mengambil semua link download video (baik 360p dan 540p)
         for idx, link in enumerate(video_links):
@@ -184,7 +191,6 @@ try:
         # Menutup file setelah selesai menulis link
         high_quality_file.close()
         low_quality_file.close()
-
         # Menunggu beberapa detik sebelum melanjutkan ke episode berikutnya
         sleep(2)
 
